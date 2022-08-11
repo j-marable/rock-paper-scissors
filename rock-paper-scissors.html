@@ -1,80 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissors Game</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <script>
-            const choices = [
-                "rock",
-                "paper",
-                "scissors"
-            ];
-
-            function getComputerChoice() {
-                return choices[Math.floor(Math.random()*choices.length)]
-            }
-
-            let computerSelection;
-            let playerSelection;
-            let computerScore;
-            let playerScore;
-
-            game();
-
-            function game() {
-                computerScore = 0;
-                playerScore = 0;
-                for (let i=0; i<5; i++) {
-                    onUserInput();
-                }
-                console.log(declareWinner());
-
-                function declareWinner() {
-                    if (playerScore === computerScore) {
-                        alert (playerScore + '-' + computerScore + '\nTie game!');
-                        return playerScore + '-' + computerScore + '\nTie game!';
-                    } else if (playerScore>computerScore) {
-                        alert (playerScore + '-' + computerScore + '\nYou win!');
-                        return playerScore + '-' + computerScore + '\nYou win!';
-                    } else {
-                        alert (playerScore + '-' + computerScore + '\nYou lost sucka!');
-                        return playerScore + '-' + computerScore + '\nYou lost sucka!'
-                    }
-                }
-            }
-
-            function onUserInput () {
-                playerSelection = prompt('Rock, Paper, or Scissors?', '');
-                if ((playerSelection.toLowerCase() == 'rock')
-                || (playerSelection.toLowerCase() == 'paper')
-                || (playerSelection.toLowerCase() == 'scissors')) {
-                    console.log(playRound(playerSelection, computerSelection));
-                } else{
-                    alert ('The input you entered is not a valid choice.');
-                    onUserInput();
-                }
-            }
-        
-            function playRound(playerSelection, computerSelection) {
-                computerSelection = getComputerChoice().toLowerCase();
-                playerSelection = playerSelection.toLowerCase();
-                if (computerSelection == playerSelection) {
-                    alert('Tie game!');
-                    return 'Tie game \nComputer Score: ' + computerScore + '\nYour Score: ' + playerScore;
-                } else if ((computerSelection == 'rock' && playerSelection == 'scissors')
-                || (computerSelection == 'scissors' && playerSelection == 'paper')
-                || (computerSelection == 'paper' && playerSelection == 'rock')) {
-                    alert('You lose! ' + computerSelection + ' beats ' + playerSelection);
-                    return 'Computer Score: ' + ++computerScore +
-                            '\nYour Score: ' + playerScore;
-                } else {
-                    alert('You win! ' + playerSelection + ' beats ' + computerSelection);
-                    return 'Your Score: ' + ++playerScore +
-                            '\nComputer Score: ' + computerScore;
-                }
-            }
-        </script>
-    </body>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="rock-paper-scissors.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lacquer&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script src="rps2.js" defer></script>
+  </head>
+  <body>
+    <main id="main-content">
+      <h1 id="title">Man vs Computer</h1>
+      <p class="desc animate" id="desc1">
+        Machines are threatening to take over the world...
+      </p>
+      <p class="desc disappear" id="desc2">
+        Unless you can defeat them in a game of rock paper scissors first to
+        5...
+      </p>
+      <p class="desc disappear" id="desc3">
+        Do you have what it takes to save mankind?
+      </p>
+      <p id="cta">Choose your weapon!</p>
+      <div id="game-container">
+        <div id="btn-container">
+          <div id="rock" class="button">
+            <img src="cave-painting.png" alt="Rock" />
+          </div>
+          <div id="paper" class="button">
+            <img src="document.png" alt="Paper" />
+          </div>
+          <div id="scissors" class="button">
+            <img src="scissors-opened-tool-shape.png" alt="Scissors" />
+          </div>
+        </div>
+        <div id="score-label">
+          <p class="label">you</p>
+          <p class="label">computer</p>
+        </div>
+        <div id="score-container">
+          <div id="player-score" class="score">0</div>
+          <div id="computer-score" class="score">0</div>
+        </div>
+        <div id="results-container"></div>
+      </div>
+    </main>
+    <div id="end-alert" class="disappear">
+      <div id="end-desc"></div>
+      <a id="retry-btn"></a>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
